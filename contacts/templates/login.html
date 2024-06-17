@@ -2,18 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home Page</title>
 </head>
 <body>
 {% extends 'base.html' %}
+{%  block content %}
+        {% if user.is_authenticated %}
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%  if contacts  %}
+                    {% for contact in contacts %}
+                <tr>
 
-{% block content %}
-    <div class="col-md-6 offset-md-3">
+                    <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+                    <td>{{ contact.email}}</td>
+                    <td>{{ contact.phone_number}}</td>
+                    <td> {{ contact.address}}</td>
+                    <td> <a href="{% url 'contact' contact.id %}" style="color: black">{{ contact.id}}</a></td>
+                </tr>
+
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+
+
+        {% else %}
+
+            <div class="col-md-6 offset-md-3">
 
             <h1>Login</h1>
 
             <br/>
-            <form method="POST" action="{% url 'home' %}">
+            <form method="POST" action="{% url 'login' %}">
                 {% csrf_token %}
                 <form>
                     <div class="mb-3">
@@ -29,8 +59,8 @@
 
 
 </div>
+        {% endif  %}
+
 {% endblock %}
-
-
 </body>
 </html>
