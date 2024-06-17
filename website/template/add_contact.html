@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>Add Record</h1>
+    <br/>
+
+    <form method="POST" action="{% url 'add_record' %}" >
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <br/>
+    <button type="submit" class="btn btn-secondary">Add Contact</button>
+    <a href="{% url 'home'  %}" class="btn btn-secondary">Back</a>
+    </form>
+
+
+{% endblock %}
+</body>
+</html>
