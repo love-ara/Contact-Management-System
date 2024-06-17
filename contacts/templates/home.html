@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,15 +19,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                {%  if records  %}
-                    {% for record in records %}
+                {%  if contacts  %}
+                    {% for contact in contacts %}
                 <tr>
 
-                    <td>{{ record.first_name }} {{ record.last_name }}</td>
-                    <td>{{ record.email}}</td>
-                    <td>{{ record.phone}}</td>
-                    <td> {{ record.address}}</td>
-                    <td> <a href="{% url 'record' record.id %}" style="color: black">{{ record.id}}</a></td>
+                    <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+                    <td>{{ contact.email}}</td>
+                    <td>{{ contact.phone_number}}</td>
+                    <td> {{ contact.address}}</td>
+                    <td> <a href="{% url 'contact' contact.id %}" style="color: black">{{ contact.id}}</a></td>
                 </tr>
 
                     {% endfor %}
@@ -65,4 +64,3 @@
 {% endblock %}
 </body>
 </html>
-

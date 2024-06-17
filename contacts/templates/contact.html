@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Detail</title>
+</head>
+<body>
+
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card">
+  <div class="card-header">
+      <strong>{{ customer_contact.first_name }} {{ customer_contact.last_name }}</strong>
+  </div>
+  <div class="card-body">
+    <p class="card-title">
+        <strong>Email: </strong>{{ customer_contact.email}}
+        </p>
+        <p class="card-title">
+        <strong>Phone: </strong> {{ customer_contact.phone}}
+        </p>
+        <p class="card-title">
+        <strong>Address: </strong>{{ customer_contact.address}}
+        </p>
+        <p class="card-title">
+        <strong>ID: </strong>{{ customer_contact.id}}
+        </p>
+  </div>
+    </div>
+
+    <br/><br/>
+    <a href="{% url 'home'  %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'delete_record' customer_contact.id  %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'update_record' customer_contact.id  %}" class="btn btn-secondary">Update Record</a>
+
+
+
+{% endblock %}
+
+</body>
+</html>
