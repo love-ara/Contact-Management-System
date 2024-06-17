@@ -48,7 +48,7 @@ class RegistrationForm(UserCreationForm):
 
 
 # Create Add Record Form
-class AddRecordForm(forms.ModelForm):
+class AddContactForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder": "First Name",
                                                                                       "class": "form-control"}),
                                  label="")

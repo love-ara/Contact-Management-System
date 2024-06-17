@@ -6,7 +6,7 @@ from .models import Detail
 
 # Create your views here.
 def home(request):
-    records = Detail.objects.all()
+    details = Detail.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -20,4 +20,4 @@ def home(request):
             messages.success(request, 'There Was An Error Logging in')
             return redirect('home')
     else:
-        return render(request, 'home.html', {'records': records})
+        return render(request, 'home.html', {'details': details})
