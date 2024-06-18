@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Contact</title>
+</head>
+<body>
+{% extends 'base.html' %}
+<h1>Delete Contact</h1>
+<p>Are you sure you want to delete {{ contact.id }}?</p>
+
+<form action="{% url 'delete_contact' contact.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
+</body>
+</html>

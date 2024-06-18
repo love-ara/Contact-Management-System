@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import AddContactForm, UserRegistrationForm
@@ -88,3 +88,17 @@ def create_contact(request):
     else:
         form = AddContactForm()
     return render(request, 'contact_form.html', {'form': form})
+
+
+# delete contact
+def delete_contact(request, pk):
+    if request.user.is_authenticated:
+        delete_this = Contact.objects.get(id=pk)
+        delete_this.delete()
+        messages.success(request, "Contact deleted successfully")
+        return redirect('home')
+    else:
+        messages.success(request, "You Must Be Logged In")
+        return redirect('home')
+
+
