@@ -13,3 +13,9 @@ class Contact(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
+class SharedContact(models.Model):
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
+    shared_with = models.ForeignKey(User, related_name='shared_contacts', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.contact.first_name} shared with {self.shared_with.last_name}"

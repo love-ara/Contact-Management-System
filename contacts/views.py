@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import AddContactForm, UserRegistrationForm
-from .models import Contact
+from .forms import AddContactForm, UserRegistrationForm, ShareContactForm
+from .models import Contact, SharedContact
 
 
 def home(request):
@@ -102,3 +102,14 @@ def delete_contact(request, pk):
         return redirect('home')
 
 
+def share_contact_view(request, contact_id):
+    contact = get_object_or_404(Contact, id=contact_id, owner=request.user)
+    if request.method == 'POST':
+        form = ShareContactForm(request.POST)
+        if form.is_valid():
+            shared_with = form.cleaned_data['shared_with']
+            SharedContact.objects.create(contact=contact, shared_with=shared_with)
+            return redirect('contact_list')
+    else:
+        form = ShareContactForm(initial={'contact': contact})
+    return render(request, 'contact_form.html', {'form': form, 'contact': contact})

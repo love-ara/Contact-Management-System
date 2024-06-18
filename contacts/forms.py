@@ -67,3 +67,8 @@ class AddContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'address', ]
+
+
+class ShareContactForm(forms.Form):
+    contact = forms.ModelChoiceField(queryset=Contact.objects.all(), widget=forms.HiddenInput())
+    shared_with = forms.ModelChoiceField(queryset=User.objects.all())
