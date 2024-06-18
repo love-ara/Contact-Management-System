@@ -6,7 +6,18 @@ from .models import Contact
 
 
 def home(request):
-    return render(request, 'home.html')
+    contacts = Contact.objects.all()
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'You have been logged in')
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password')
+    return render(request, 'home.html', {'contacts': contacts})
 
 
 def user_login(request):
@@ -24,13 +35,13 @@ def user_login(request):
             messages.success(request, 'There Was An Error Logging in')
             return redirect('home')
     else:
-        return render(request, 'home.html', {'contacts': contacts})
+        return render(request, 'login.html', {'contacts': contacts})
 
 
 def customer_contact(request, pk):
     if request.user.is_authenticated:
-        customer_detail = Contact.objects.get(id=pk)
-        return render(request, 'contact.html', {'customer_detail': customer_detail})
+        customer_contact = Contact.objects.get(id=pk)
+        return render(request, 'contact.html', {'customer_contact': customer_contact})
     else:
         messages.success(request, 'You Must Be Logged In To View')
         return redirect('home')
@@ -56,21 +67,6 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 
-# Login view
-# def user_login(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         password = request.POST['password']
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             messages.success(request, 'You have been logged in')
-#             return redirect('home')
-#         else:
-#             messages.error(request, 'Invalid username or password')
-#     return render(request, 'login.html')
-
-
 # Logout view
 def logout_user(request):
     logout(request)
@@ -87,7 +83,6 @@ def create_contact(request):
         if form.is_valid():
             contact = form.save()
             contact.save()
-            contact.shared_with.add(request.user)
             messages.success(request, 'Contact created successfully')
             return redirect('home')
     else:
