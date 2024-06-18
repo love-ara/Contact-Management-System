@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import share_contact_view
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -9,5 +10,6 @@ urlpatterns = [
     path('contact/<int:pk>', views.customer_contact, name='contact'),
     path('create_contact/', views.create_contact, name='create_contact'),
     path('delete_contact/<int:pk>', views.delete_contact, name='delete_contact'),
+    path('contact/share/<int:contact_id>/', share_contact_view, name='share_contact'),
 
 ]
