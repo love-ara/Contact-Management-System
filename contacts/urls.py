@@ -12,7 +12,11 @@ urlpatterns = [
     path('contact/<int:pk>', views.contact_list, name='contact'),
     path('create_contact/', views.create_contact, name='create_contact'),
     path('delete_contact/<int:pk>', views.delete_contact, name='delete_contact'),
+<<<<<<< HEAD
     path('search_contact', views.search_contact, name='search_contact'),
+=======
+    path('contact/update/<int:pk>/', views.update_contact, name='update_contact'),
+>>>>>>> origin/update
 
 ]
 if settings.DEBUG:

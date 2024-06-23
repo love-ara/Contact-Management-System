@@ -3,7 +3,11 @@ import mysql.connector
 dataBase = mysql.connector.connect(
     host="localhost",
     user="root",
+<<<<<<< HEAD
     password="imotua26"
+=======
+    password="Password"
+>>>>>>> origin/update
 )
 
 cursorObject = dataBase.cursor()
