@@ -63,7 +63,21 @@ class AddContactForm(forms.ModelForm):
     address = forms.CharField(required=True,
                               widget=forms.widgets.TextInput(attrs={"placeholder": "Address", "class": "form-control"}),
                               label="")
+    image = forms.ImageField(required=False)
+    date_added = forms.DateField(
+        widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+        label="Date Added"
+    )
 
     class Meta:
         model = Contact
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'address', ]
+        template_name = 'create_contact.html'
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'address', 'image', 'date_added']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Address'}),
+            'date_added': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }

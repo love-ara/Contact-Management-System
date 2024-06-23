@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import AddContactForm, UserRegistrationForm
@@ -38,10 +39,10 @@ def user_login(request):
         return render(request, 'login.html', {'contacts': contacts})
 
 
-def customer_contact(request, pk):
+def contact_list(request, pk):
     if request.user.is_authenticated:
-        customer_contact = Contact.objects.get(id=pk)
-        return render(request, 'contact.html', {'customer_contact': customer_contact})
+        contact_detail = Contact.objects.get(id=pk)
+        return render(request, 'contact.html', {'contact_detail': contact_detail})
     else:
         messages.success(request, 'You Must Be Logged In To View')
         return redirect('home')
@@ -79,7 +80,7 @@ def create_contact(request):
     if not request.user.is_authenticated:
         return redirect('login')
     if request.method == 'POST':
-        form = AddContactForm(request.POST or None)
+        form = AddContactForm(request.POST, request.FILES)
         if form.is_valid():
             contact = form.save()
             contact.save()
@@ -87,7 +88,7 @@ def create_contact(request):
             return redirect('home')
     else:
         form = AddContactForm()
-    return render(request, 'contact_form.html', {'form': form})
+    return render(request, 'create_contact.html', {'form': form})
 
 
 # delete contact
@@ -102,3 +103,18 @@ def delete_contact(request, pk):
         return redirect('home')
 
 
+def search_contact(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    elif request.GET:
+        search_term = request.GET['search_term']
+        search_results = Contact.objects.filter(
+            Q(first_name__icontains=search_term) |
+            Q(last_name__icontains=search_term) |
+            Q(email__icontains=search_term) |
+            Q(phone_number__icontains=search_term)
+        )
+        context = {'search_results': search_results, 'search_term': search_term}
+        return render(request, 'search.html', context)
+    else:
+        return redirect('home')
