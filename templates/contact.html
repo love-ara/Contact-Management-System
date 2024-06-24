@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <strong>{{ contact_detail.first_name }} {{ contact_detail.last_name }}</strong>
+        </div>
+        <div class="card-body">
+            <p class="card-title">
+                <strong>Email: </strong>{{ contact_detail.email }}
+            </p>
+            <p class="card-title">
+                <strong>Phone: </strong> {{ contact_detail.phone_number }}
+            </p>
+            <p class="card-title">
+                <strong>Address: </strong>{{ contact_detail.address }}
+            </p>
+            <p class="card-title">
+                <strong>ID: </strong>{{ contact_detail.id }}
+            </p>
+            {% if contact_detail.image %}
+                <img src="{{ contact_detail.image.url }}" class="img-fluid" alt="Contact Image"/>
+            {% else %}
+                <img src="{% static 'images/image.png' %}" class="img-fluid" alt="Default Image"/>
+            {% endif %}
+            <p>Date Added: {{ contact_detail.date_added }}</p>
+        </div>
+    </div>
+
+    <br/><br/>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+    <a href="{% url 'delete_contact' contact_detail.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'update_contact' contact_detail.id  %}" class="btn btn-danger">Update</a>
+
+
+{% endblock %}

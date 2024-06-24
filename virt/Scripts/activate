@@ -14,18 +14,12 @@ deactivate () {
         unset _OLD_VIRTUAL_PYTHONHOME
     fi
 
-<<<<<<< HEAD
     # This should detect bash and zsh, which have a hash command that must
     # be called to get it to forget past commands.  Without forgetting
     # past commands the $PATH changes we made may not be respected
     if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
         hash -r 2> /dev/null
     fi
-=======
-    # Call hash to forget past commands. Without forgetting
-    # past commands the $PATH changes we made may not be respected
-    hash -r 2> /dev/null
->>>>>>> origin/update
 
     if [ -n "${_OLD_VIRTUAL_PS1:-}" ] ; then
         PS1="${_OLD_VIRTUAL_PS1:-}"
@@ -45,7 +39,6 @@ deactivate () {
 deactivate nondestructive
 
 # on Windows, a path can contain colons and backslashes and has to be converted:
-<<<<<<< HEAD
 if [ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
@@ -53,15 +46,6 @@ if [ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ] ; then
 else
     # use the path as-is
     export VIRTUAL_ENV="C:\Users\Administrator\Desktop\Contact-Management-System\virt"
-=======
-if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
-    # transform D:\path\to\venv to /d/path/to/venv on MSYS
-    # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath "C:\Users\DELL\Contact-Management-System\virt")
-else
-    # use the path as-is
-    export VIRTUAL_ENV="C:\Users\DELL\Contact-Management-System\virt"
->>>>>>> origin/update
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -84,15 +68,9 @@ if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     export VIRTUAL_ENV_PROMPT
 fi
 
-<<<<<<< HEAD
 # This should detect bash and zsh, which have a hash command that must
 # be called to get it to forget past commands.  Without forgetting
 # past commands the $PATH changes we made may not be respected
 if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
     hash -r 2> /dev/null
 fi
-=======
-# Call hash to forget past commands. Without forgetting
-# past commands the $PATH changes we made may not be respected
-hash -r 2> /dev/null
->>>>>>> origin/update

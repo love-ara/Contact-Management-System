@@ -8,11 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-<<<<<<< HEAD
 set VIRTUAL_ENV=C:\Users\Administrator\Desktop\Contact-Management-System\virt
-=======
-set VIRTUAL_ENV=C:\Users\DELL\Contact-Management-System\virt
->>>>>>> origin/update
 
 if not defined PROMPT set PROMPT=$P$G
 
